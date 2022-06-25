@@ -22,7 +22,7 @@ function Frontend({children, metadata}) {
       <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 	    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     </Head>
-    <Container maxW='1140px' p="0">          
+    <Container maxW='1040px' p="0">          
        <Topbar />
       <Navbar />
       {children}

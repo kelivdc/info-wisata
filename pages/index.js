@@ -1,3 +1,4 @@
+import { Box, Flex } from "@chakra-ui/react";
 import Frontend from "../components/Frontend";
 
 export default function Home() {
@@ -8,7 +9,14 @@ export default function Home() {
   }
   return (
     <Frontend metadata={metadata}>      
-      Halaman depan
+      <Flex direction={{base: "column", md: "row"}} gap={{base: 2, md: 8}}>
+        <Box w={{base: "100%", md: "70%"}} bg="yellow.200">
+          Kiri
+        </Box>
+        <Box w={{base: "100%", md: "30%"}} bg="red.200">
+          Kanan
+        </Box>
+      </Flex>
     </Frontend>       
   )
 }

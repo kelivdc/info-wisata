@@ -16,10 +16,13 @@ import {
     DrawerContent,
     DrawerCloseButton,
     VStack,
-    Heading
+    Heading,
+    Input,
+    InputGroup,
+    InputRightElement
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import { SunIcon, HamburgerIcon } from '@chakra-ui/icons'
+import { SunIcon, HamburgerIcon, SearchIcon } from '@chakra-ui/icons'
 
 function Topbar() {
     const { colorMode, toggleColorMode } = useColorMode()
@@ -27,10 +30,11 @@ function Topbar() {
     const tanggal = today.toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric'})
     const {isOpen, onOpen, onClose} = useDisclosure()
     const btnRef = React.useRef()    
+    // const searchBg = props.colorMode === 'dark' ? 'Dark' : 'Light',
     const Goto = ({url, label}) => {
         return (
             <NextLink href={url} passHref>
-                <Link w="100%" fontSize="xl">{label}</Link>
+                <Link w="100%">{label}</Link>
             </NextLink>  
         )
     }
@@ -57,11 +61,17 @@ function Topbar() {
                 <DrawerContent>
                     <DrawerCloseButton />
                     <DrawerBody>
-                        <Heading fontSize="xl" py={2}>Navigation</Heading>
+                        <Heading fontSize="xl" py={2} color="gray.500">Navigation</Heading>
                         <VStack spacing={5} mt="10px">
-                            <Goto url="/" label="Home" />
-                            <Goto url="/about" label="About" />
-                            <Goto url="/contact" label="Contact" />
+                           <InputGroup>
+                            <Input placeholder='Search' />
+                            <InputRightElement>
+                                <IconButton bg="none" icon={<SearchIcon />} />
+                            </InputRightElement>
+                           </InputGroup>
+                            <Goto url="/" label="Beranda" />
+                            <Goto url="/about" label="Tentang" />
+                            <Goto url="/contact" label="Hubungi" />
                             <Goto url="/Disclamer" label="Disclamer" />
                         </VStack>
                     </DrawerBody>
@@ -69,7 +79,7 @@ function Topbar() {
             </Drawer>
           </HStack>
         </Flex>
-       </Box>
+    </Box>
   )
 }
 
