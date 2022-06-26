@@ -4,6 +4,8 @@ import Frontend from "../components/Frontend";
 import Terbaru from "../components/Terbaru";
 import NextLink from 'next/link'
 import Image from "next/image";
+import zebraPic from "../public/img/zebra.jpg"
+import gajahPic from "../public/img/gajah.jpg"
 
 export default function Home() {
   const metadata = {
@@ -20,7 +22,7 @@ export default function Home() {
           <Container maxW="1040px" p="0">
             <Flex direction={{base: "column", md: "row"}} gap={{base: 2, md: 8}} p={2} mx="auto">
                 <Box w={{base: "100%", md: "60%"}} position="relative">
-                  <Image src="/img/zebra.jpg" layout="fill"  />                
+                  <Image src={zebraPic}  />                
                   
                   <Box position="absolute" overflow="hidden" top="0" left="0" h="100%" w="100%" bg="#000" opacity="0.4" rounded={8} />
                   <Box position="absolute" overflow="hidden" bottom="0" left="0" p={4} color="white">
@@ -44,7 +46,7 @@ export default function Home() {
                 {[...Array(4)].map((x, i) =>
                 <Stack direction={{base: "column", md: "row"}} w="100%" gap={{base: 0, md: 4}} key={i}>
                   <Box w={{base: "100%", md: "45%"}} position="relative">
-                    <Image src="/img/gajah.jpg" alt="Zebra" layout="fill" objectFit="cover" />
+                    <Image src={gajahPic} />
                     <Box bg="red.600" color="white" fontSize="12px" as="text" rounded={4} p={1} position="absolute" bottom="0" m={2}>Wisata</Box>
                   </Box>
                   <Box w={{base: "100%", md: "55%"}} color="gray.700">
