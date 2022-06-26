@@ -45,11 +45,11 @@ export default function Home() {
               <VStack w={["100%","67%"]} bg={bgTerbaru} p={4} gap={4}>
                 {[...Array(4)].map((x, i) =>
                 <Stack direction={["column", "row"]} w="100%" gap={[0, 4]} key={i}>
-                  <Box w={["100%", "45%"]} position="relative">
-                    <Image src={gajahPic} layout="responsive" priority/>
+                  <Box w={["100%", "35%"]} position="relative">
+                    <Image src={gajahPic} layout="responsive" priority />
                     <Box bg="red.600" color="white" fontSize="12px" as="text" rounded={4} p={1} position="absolute" bottom="0" m={2}>Wisata</Box>
                   </Box>
-                  <Box w={["100%", "55%"]} color={textColor}>
+                  <Box w={["100%", "65%"]} color={textColor}>
                     <Heading as="h2" fontSize="20px">Judulnya panjang bro</Heading>
                     <Box pt={2} fontSize="sm">
                       <TimeIcon /> 2 hari yang lalu
@@ -71,7 +71,7 @@ export default function Home() {
                         <Center bg="gray.500" px={4} py={1} rounded={20}>{i}</Center>
                       </Box>
                       <Box w="95%">
-                        <Text noOfLines={3}>Commodo do culpa aute ipsum sit consectetur ut nostrud enim enim officia occaecat nostrud. </Text>
+                        <Text noOfLines={3} fontSize="sm" lineHeight="1.2rem">Commodo do culpa aute ipsum sit consectetur ut nostrud enim enim officia occaecat nostrud. </Text>
                       </Box>
                   </Flex>
                   <Divider />                  
