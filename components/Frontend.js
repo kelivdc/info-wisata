@@ -1,7 +1,5 @@
 import React from 'react'
-import { Box, Center, Container, Flex, IconButton, Spacer, useColorMode, Text, Link } from '@chakra-ui/react'
-import NextLink from 'next/link'
-import { SunIcon } from '@chakra-ui/icons'
+import { Box, Center, Container, Flex, IconButton, Spacer, useColorModeValue, Text, Link } from '@chakra-ui/react'
 import Head from 'next/head'
 import Navbar from './Navbar'
 import Topbar from './Topbar'
@@ -13,7 +11,7 @@ function Frontend({children, metadata}) {
     description: metadata.description?? '',
     robots: metadata.robots?? ''
   }
-  
+  const bgBox = useColorModeValue('blue.600','blue.700')
   return (
     <>
       <Head>
@@ -26,9 +24,13 @@ function Frontend({children, metadata}) {
       <Container maxW='1040px' p="0">          
         <Topbar />
         <Navbar />
-      </Container>
+      </Container>      
       {children}
-      <Footer />    
+      <Box bg={bgBox}>
+        <Container maxW='1040px' p="0">          
+          <Footer />  
+        </Container>
+      </Box>  
     </>
   )
 }

@@ -3,7 +3,9 @@ import React from 'react'
 
 function Footer() {
   return (
-    <Box>Footer</Box>
+    <Box p={2} color="gray.300">
+        Copyright &copy; 2022. All right reserved
+    </Box>
   )
 }
 

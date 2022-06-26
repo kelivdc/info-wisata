@@ -13,7 +13,7 @@ const theme = extendTheme({
                 bgColor: props.colorMode === 'dark' ? 'Dark' : 'Light',
                 color: props.colorMode === 'dark' ? 'gray.300' : 'gray.700',
                 lineHeight: 'tall',
-            },            
+            }
         })
     }
 })

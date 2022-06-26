@@ -1,6 +1,24 @@
 import React from 'react'
-import { HStack, Box, Link, useColorModeValue, Image, Flex, Center } from '@chakra-ui/react'
+import { 
+    HStack, 
+    Box, 
+    Link, 
+    useColorModeValue, 
+    Image, Flex, 
+    Center, 
+    Spacer, 
+    IconButton, 
+    Popover, 
+    PopoverTrigger, 
+    Portal, 
+    PopoverContent,
+    PopoverArrow,
+    Input,
+    InputGroup,
+    InputRightElement
+ } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import { SearchIcon } from '@chakra-ui/icons'
 
 const Goto = ({url, label}) => {
     const bgBox = useColorModeValue('blue.400','gray.600')
@@ -16,15 +34,38 @@ function Navbar() {
   return (
     <>
     <Box bg={bgBox} color='white' px={{base: '5px ', md: '15px'}}>
-        <HStack spacing="5px" overflowX="auto" scrollBehavior="none">           
-            <Goto url="/wisata" label="Wisata" />
-            <Goto url="/cafe" label="Cafe" />
-            <Goto url="/pegunungan" label="Pegunungan" />            
-        </HStack>
+        <Flex>
+            <Box>
+                <HStack spacing="5px" overflowX="auto" scrollBehavior="none">           
+                    <Goto url="/wisata" label="Wisata" />
+                    <Goto url="/cafe" label="Cafe" />
+                    <Goto url="/pegunungan" label="Pegunungan" />            
+                </HStack>
+            </Box>
+            <Spacer />            
+            <Popover placement="bottom-end">
+                <PopoverTrigger>
+                    <IconButton bg="none" colorScheme="none" icon={<SearchIcon />} />
+                </PopoverTrigger>
+                <Portal shadow>
+                    <PopoverContent>
+                        <PopoverArrow />
+                        <Box p={2}>
+                        <InputGroup bg="white">
+                            <Input placeholder='Search' focusBorderColor="none" _placeholder={{color: "gray.500"}} />
+                            <InputRightElement>
+                                <IconButton bg="none" icon={<SearchIcon />} />
+                            </InputRightElement>
+                           </InputGroup>
+                        </Box>
+                    </PopoverContent>
+                </Portal>
+            </Popover>
+        </Flex>
     </Box>
-        <Center my="10px">
-            <Image src="/img/top-image.jpeg" alt="Top Image" />
-        </Center>
+    <Center my="10px">
+        <Image src="/img/top-image.jpeg" alt="Top Image" />
+    </Center>
     </>
   )
 }
