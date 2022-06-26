@@ -1,5 +1,5 @@
 import { TimeIcon } from "@chakra-ui/icons";
-import { Box, Container, Flex, Heading, useColorModeValue, Link, Stack, VStack, Text, color } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, useColorModeValue, Link, Stack, VStack, Text, Center, Divider } from "@chakra-ui/react";
 import Frontend from "../components/Frontend";
 import Terbaru from "../components/Terbaru";
 import NextLink from 'next/link'
@@ -16,12 +16,13 @@ export default function Home() {
     const bgBox = useColorModeValue('gray.100','gray.700')
     const bgTerbaru = useColorModeValue('white','gray.500')
     const bgMenarik = useColorModeValue('gray.300','gray.800')
+    const textColor = useColorModeValue('gray.800','gray.200')
   return (    
       <Frontend metadata={metadata}>        
         <Box bg={bgBox} py={4}>
           <Container maxW="1040px" p="0">
-            <Flex direction={{base: "column", md: "row"}} gap={{base: 2, md: 8}} p={2} mx="auto">
-                <Box w={{base: "100%", md: "60%"}} position="relative">
+            <Flex direction={["column","row"]} gap={[2, 8]} p={2} mx="auto">
+                <Box w={["100%", "60%"]} position="relative">
                   <Image src={zebraPic} layout="responsive" priority  />
                   <Box position="absolute" overflow="hidden" top="0" left="0" h="100%" w="100%" bg="#000" opacity="0.4" rounded={8} />
                   <Box position="absolute" overflow="hidden" bottom="0" left="0" p={4} color="white">
@@ -36,20 +37,20 @@ export default function Home() {
                     </Box>
                   </Box>              
                 </Box>
-              <Box w={{base: "100%", md: "40%"}}>
+              <Box w={["100%", "40%"]}>
                 <Terbaru />
               </Box>
             </Flex>
-            <Flex direction={{base: "column", md: "row"}} p={2} mx="auto">
-              <VStack w={{base: "100%", md: "67%"}} bg={bgTerbaru} p={4} gap={4}>
+            <Flex direction={["column", "row"]} p={2} mx="auto">
+              <VStack w={["100%","67%"]} bg={bgTerbaru} p={4} gap={4}>
                 {[...Array(4)].map((x, i) =>
-                <Stack direction={{base: "column", md: "row"}} w="100%" gap={{base: 0, md: 4}} key={i}>
-                  <Box w={{base: "100%", md: "45%"}} position="relative">
+                <Stack direction={["column", "row"]} w="100%" gap={[0, 4]} key={i}>
+                  <Box w={["100%", "45%"]} position="relative">
                     <Image src={gajahPic} layout="responsive" priority/>
                     <Box bg="red.600" color="white" fontSize="12px" as="text" rounded={4} p={1} position="absolute" bottom="0" m={2}>Wisata</Box>
                   </Box>
-                  <Box w={{base: "100%", md: "55%"}} color="gray.700">
-                    <Heading as="h2" fontSize="xl">Judulnya panjang bro</Heading>
+                  <Box w={["100%", "55%"]} color={textColor}>
+                    <Heading as="h2" fontSize="20px">Judulnya panjang bro</Heading>
                     <Box pt={2} fontSize="sm">
                       <TimeIcon /> 2 hari yang lalu
                     </Box>
@@ -61,12 +62,20 @@ export default function Home() {
                 </Stack>
                 )}
               </VStack>
-              <Stack bg={bgMenarik} w={{base: "100%", md:"33%"}} p={4}>
-                <Heading as="h2" fontSize={{base: "xl", md: "2xl"}} color="blue.500">Menarik</Heading>
+              <Stack bg={bgMenarik} w={["100%", "33%"]}>
+                <Heading as="h2" fontSize={["xl", "2xl"]} color="blue.500" p={4}>Menarik</Heading>
                 {[...Array(10)].map((x, i) =>
-                <Flex key={i}>
-                    Kanan
-                </Flex>
+                  <>
+                  <Flex key={i} gap="30px" w="100%" px={2}>
+                      <Box w="5%" my="auto">
+                        <Center bg="gray.500" px={4} py={1} rounded={20}>{i}</Center>
+                      </Box>
+                      <Box w="95%">
+                        <Text noOfLines={3}>Commodo do culpa aute ipsum sit consectetur ut nostrud enim enim officia occaecat nostrud. </Text>
+                      </Box>
+                  </Flex>
+                  <Divider />                  
+                  </>
                 )}
               </Stack>
             </Flex>

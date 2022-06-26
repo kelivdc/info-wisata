@@ -33,7 +33,7 @@ function Navbar() {
   const bgBox = useColorModeValue('blue.600','blue.700')
   return (
     <>
-    <Box bg={bgBox} color='white' px={{base: '5px ', md: '15px'}}>
+    <Box bg={bgBox} color='white' px={['5px ', '15px']}>
         <Flex>
             <Box>
                 <HStack spacing="5px" overflowX="auto" scrollBehavior="none">           
