@@ -13,6 +13,7 @@ export default function Home() {
     description: 'Website paling keren',
     robots: 'index, follow'
   }
+  
     const bgBox = useColorModeValue('gray.100','gray.700')
     const bgTerbaru = useColorModeValue('white','gray.500')
     const bgMenarik = useColorModeValue('gray.300','gray.800')
