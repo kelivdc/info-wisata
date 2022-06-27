@@ -5,7 +5,7 @@ import Navbar from './Navbar'
 import Topbar from './Topbar'
 import Footer from './Footer'
 
-function Frontend({children, metadata}) {  
+function Frontend({children, metadata, categories}) {  
   const meta = {
     title: metadata.title?? 'Hello',
     description: metadata.description?? '',

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { 
     HStack, 
     Box, 
@@ -19,6 +19,7 @@ import {
  } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { SearchIcon } from '@chakra-ui/icons'
+import { useSSE } from 'use-sse'
 
 const Goto = ({url, label}) => {
     const bgBox = useColorModeValue('blue.400','gray.600')
@@ -30,16 +31,20 @@ const Goto = ({url, label}) => {
 }
 
 function Navbar() {
-  const bgBox = useColorModeValue('blue.600','blue.700')
+  const bgBox = useColorModeValue('blue.600','blue.700');    
+  const categories = [
+      {slug: 'wisata', name: 'Wisata'},
+      {slug: 'cafe', name: 'Cafe'},
+  ]
   return (
     <>
-    <Box bg={bgBox} color='white' px={['5px ', '15px']}>
+    <Box bg={bgBox} color='white' px={['5px ', '15px']}>        
         <Flex>
             <Box>
-                <HStack spacing="5px" overflowX="auto" scrollBehavior="none">           
-                    <Goto url="/wisata" label="Wisata" />
-                    <Goto url="/cafe" label="Cafe" />
-                    <Goto url="/pegunungan" label="Pegunungan" />            
+                <HStack spacing="5px" overflowX="auto" scrollBehavior="none">       
+                {categories.map((category, i) => 
+                    <Goto url={`/category/${category.slug}`} label={category.name} key={i} />
+                )}
                 </HStack>
             </Box>
             <Spacer />            
