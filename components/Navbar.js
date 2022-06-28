@@ -30,19 +30,32 @@ const Goto = ({url, label}) => {
     )
 }
 
-function Navbar() {
-  const bgBox = useColorModeValue('blue.600','blue.700');    
-  const categories = [
+function Navbar({categories}) {
+  const bgBox = useColorModeValue('blue.600','blue.700');   
+  const [data, setData] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+  const categories_fix = [
       {slug: 'wisata', name: 'Wisata'},
       {slug: 'cafe', name: 'Cafe'},
-  ]
+  ]  
+  useEffect(() => {
+    setLoading(true);
+    fetch('/api/hello')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+  }, []);
+  if (isLoading) return <p>Loading...</p>;
+  if (!data) return <p>No profile data</p>;
   return (
     <>
     <Box bg={bgBox} color='white' px={['5px ', '15px']}>        
         <Flex>
             <Box>
                 <HStack spacing="5px" overflowX="auto" scrollBehavior="none">       
-                {categories.map((category, i) => 
+                {data.map((category, i) => 
                     <Goto url={`/category/${category.slug}`} label={category.name} key={i} />
                 )}
                 </HStack>
