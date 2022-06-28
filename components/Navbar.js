@@ -19,7 +19,9 @@ import {
  } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { SearchIcon } from '@chakra-ui/icons'
-import { useSSE } from 'use-sse'
+
+import { groq } from 'next-sanity'
+import {getClient} from '/lib/sanity.server'
 
 const Goto = ({url, label}) => {
     const bgBox = useColorModeValue('blue.400','gray.600')
@@ -32,29 +34,30 @@ const Goto = ({url, label}) => {
 
 function Navbar() {
   const bgBox = useColorModeValue('blue.600','blue.700');     
-  const [categories, setCategories] = useState([]);
-  const categories_fix = [
-      {slug: 'wisata', name: 'Wisata'},
-      {slug: 'cafe', name: 'Cafe'},
-  ]  
-  useEffect(() => {
-    async function getCategories() {
-        const resp = await fetch(
-            "https://5208wqqi.api.sanity.io/v1/data/query/production?query=*%5B_type%3D%3D%22category%22%5D%7B%0A%20%20_id%2C%0A%20%20name%2C%0A%20%20slug%0A%7D&%24slug=%22wisat%22"
-        );
-        setCategories(await resp.json())
-    }
-    getCategories();
-  },[])
+  const [categories, setCategories] = useState(null);
+  const categoryQuery = groq`
+    *[_type=="category"]{
+        _id,
+        name,
+        slug 
+    }`;
+   
+    useEffect(() => {
+        async function getCategories() {        
+            const resp = await getClient().fetch(categoryQuery);
+            setCategories(await resp);        
+        }
+        getCategories();
+    },[])
   return (
     <>
     <Box bg={bgBox} color='white' px={['5px ', '15px']}>        
-        <Flex>
-            <Box>            
-                <HStack spacing="5px" overflowX="auto" scrollBehavior="none">       
-                {categories?.result?.map((category, i) => 
-                    <Goto url={`/category/${category.slug.current}`} label={category.name} key={i} />
-                )}
+        <Flex>            
+            <Box>         
+                <HStack spacing="5px" overflowX="auto" scrollBehavior="none">
+                    {categories?.map((category, i) => 
+                        <Goto url={`/category/${category.slug?.current}`} label={category.name} key={i} />
+                    )}
                 </HStack>
             </Box>
             <Spacer />            
