@@ -30,33 +30,30 @@ const Goto = ({url, label}) => {
     )
 }
 
-function Navbar({categories}) {
-  const bgBox = useColorModeValue('blue.600','blue.700');   
-  const [data, setData] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+function Navbar() {
+  const bgBox = useColorModeValue('blue.600','blue.700');     
+  const [categories, setCategories] = useState([]);
   const categories_fix = [
       {slug: 'wisata', name: 'Wisata'},
       {slug: 'cafe', name: 'Cafe'},
   ]  
   useEffect(() => {
-    setLoading(true);
-    fetch('/api/hello')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      });
-  }, []);
-  if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>No profile data</p>;
+    async function getCategories() {
+        const resp = await fetch(
+            "https://5208wqqi.api.sanity.io/v1/data/query/production?query=*%5B_type%3D%3D%22category%22%5D%7B%0A%20%20_id%2C%0A%20%20name%2C%0A%20%20slug%0A%7D&%24slug=%22wisat%22"
+        );
+        setCategories(await resp.json())
+    }
+    getCategories();
+  },[])
   return (
     <>
     <Box bg={bgBox} color='white' px={['5px ', '15px']}>        
         <Flex>
-            <Box>
+            <Box>            
                 <HStack spacing="5px" overflowX="auto" scrollBehavior="none">       
-                {data.map((category, i) => 
-                    <Goto url={`/category/${category.slug}`} label={category.name} key={i} />
+                {categories?.result?.map((category, i) => 
+                    <Goto url={`/category/${category.slug.current}`} label={category.name} key={i} />
                 )}
                 </HStack>
             </Box>
