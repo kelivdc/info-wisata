@@ -31,10 +31,10 @@ const Goto = ({url, label}) => {
 
 function Navbar() {
   const bgBox = useColorModeValue('blue.600','blue.700');     
-  const [categories, setCategories] = useState(null);
+  const [categories, setCategories] = useState(null);  
     useEffect(() => {
         async function getCategories() {        
-            const resp = await fetch(`${process.env.SERVER_API}/api/v1/categories`);
+            const resp = await fetch(`${process.env.server_api}/api/v1/categories`);
             setCategories(await resp.json());        
         }
         getCategories();
