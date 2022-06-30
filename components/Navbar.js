@@ -20,9 +20,6 @@ import {
 import NextLink from 'next/link'
 import { SearchIcon } from '@chakra-ui/icons'
 
-import { groq } from 'next-sanity'
-import {getClient} from '/lib/sanity.server'
-
 const Goto = ({url, label}) => {
     const bgBox = useColorModeValue('blue.400','gray.600')
     return (
@@ -35,17 +32,10 @@ const Goto = ({url, label}) => {
 function Navbar() {
   const bgBox = useColorModeValue('blue.600','blue.700');     
   const [categories, setCategories] = useState(null);
-  const categoryQuery = groq`
-    *[_type=="category"]{
-        _id,
-        name,
-        slug 
-    }`;
-   
     useEffect(() => {
         async function getCategories() {        
-            const resp = await getClient().fetch(categoryQuery);
-            setCategories(await resp);        
+            const resp = await fetch(`${process.env.SERVER_API}/api/v1/categories`);
+            setCategories(await resp.json());        
         }
         getCategories();
     },[])

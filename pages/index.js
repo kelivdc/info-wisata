@@ -1,5 +1,5 @@
 import { TimeIcon } from "@chakra-ui/icons";
-import { Box, Container, Flex, Heading, useColorModeValue, Link, Stack, VStack, Text, Center, Divider } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, useColorModeValue, Link, Stack, VStack, Text, Center, Divider, Badge } from "@chakra-ui/react";
 import Frontend from "../components/Frontend";
 import Terbaru from "../components/Terbaru";
 import NextLink from 'next/link'
@@ -26,7 +26,9 @@ export default function Home() {
                   <Image src={zebraPic} layout="responsive" priority  />
                   <Box position="absolute" overflow="hidden" top="0" left="0" h="100%" w="100%" bg="#000" opacity="0.4" rounded={8} />
                   <Box position="absolute" overflow="hidden" bottom="0" left="0" p={4} color="white">
-                  <Box bg="red.600" color="white" fontSize="12px" as="span" rounded={4} p={1}>Wisata</Box>
+                  {/* <Box bg="red.600" color="white" fontSize="12px" as="span" rounded={4} p={1}>Wisata</Box> */}
+                  <Badge bg="red.600" color="white" rounded={4} letterSpacing={1} >Wisata</Badge>
+                  
                   <NextLink href="/about" passHref>
                       <Link w="100%" _hover={{textDecoration: 'none'}}>
                       <Heading as="h1" color="white" fontSize="2xl" _hover={{color: "blue.300 "}} pt={2}>PUBG Mobile 1,5: Ignition Sudah Bisa Diunduh Oleh Pengguna Android dan iOS!</Heading>
@@ -47,7 +49,8 @@ export default function Home() {
                 <Stack direction={["column", "row"]} w="100%" gap={[0, 4]} key={i}>
                     <Box w={["100%", "35%"]} position="relative">
                     <Image src={gajahPic} layout="responsive" priority />
-                    <Box bg="red.600" color="white" fontSize="12px" as="text" rounded={4} p={1} position="absolute" bottom="0" m={2}>Wisata</Box>
+                    {/* <Box bg="red.600" color="white" fontSize="12px" as="text" rounded={4} p={1} position="absolute" bottom="0" m={2}>Wisata</Box> */}
+                    <Badge bg="red.600" color="white" position="absolute" bottom="0" letterSpacing={1} m={2} rounded={4}>Wisata</Badge>
                     </Box>
                     <Box w={["100%", "65%"]} color={textColor}>
                     <Heading as="h2" fontSize="20px">Judulnya panjang bro</Heading>
