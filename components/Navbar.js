@@ -46,7 +46,7 @@ function Navbar() {
             <Box>         
                 <HStack spacing="5px" overflowX="auto" scrollBehavior="none">
                     {categories?.map((category, i) => 
-                        <Goto url={`/category/${category.slug?.current}`} label={category.name} key={i} />
+                        <Goto url={`/category/${category.slug}`} label={category.name} key={i} />
                     )}
                 </HStack>
             </Box>
