@@ -9,7 +9,7 @@ import {
   VStack,
   Checkbox
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { HiEye, HiEyeOff, HiOutlineUser } from "react-icons/hi";
 import Image from "next/image";
 import bgImage from "/public/img/white-bg.jpg"
@@ -19,7 +19,7 @@ import { Router } from "next/router";
 import { useRouter } from "next/router"
 
 function login() {
-	const [show, setShow] = React.useState(false)
+	const [show, setShow] = useState()
   	const handleClick = () => setShow(!show)
 	const router = useRouter()
   	return (
