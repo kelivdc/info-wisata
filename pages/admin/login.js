@@ -9,7 +9,7 @@ import {
   VStack,
   Checkbox
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { HiEye, HiEyeOff, HiOutlineUser } from "react-icons/hi";
 import Image from "next/image";
 import bgImage from "/public/img/white-bg.jpg"
