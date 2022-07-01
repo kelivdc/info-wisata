@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import {
   Box,
   Flex,
@@ -9,13 +10,12 @@ import {
   VStack,
   Checkbox
 } from "@chakra-ui/react";
-import { useState } from "react";
+
 import { HiEye, HiEyeOff, HiOutlineUser } from "react-icons/hi";
 import Image from "next/image";
 import bgImage from "/public/img/white-bg.jpg"
 import Head  from "next/head"
 import Goto from "/components/Goto"
-import { Router } from "next/router";
 import { useRouter } from "next/router"
 
 function login() {
