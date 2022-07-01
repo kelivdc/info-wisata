@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
   Box,
   Flex,
@@ -18,8 +18,8 @@ import Head  from "next/head"
 import Goto from "/components/Goto"
 import { useRouter } from "next/router"
 
-function login() {
-	const [show, setShow] = useState()
+function Login() {
+	const [show, setShow] = useState(false)
   	const handleClick = () => setShow(!show)
 	const router = useRouter()
   	return (
@@ -31,7 +31,7 @@ function login() {
       bg="gray.100"
       height={"100vh"}     
     >		
-		<Image src={bgImage} layout="fill" objectFit="cover" />
+		<Image src={bgImage} layout="fill" objectFit="cover" alt="" />
 			<Box bg="black" height={"100vh"} position={"absolute"}  overflow="hidden" width="full" opacity={"0.5"} top={"0"} left={"0"}></Box>
 			<Box position="absolute" overflow="hidden" bottom="0" left="0" p={4} color="white" w="full" h="100vh">
 			<Flex direction={"column"}
@@ -45,8 +45,7 @@ function login() {
 				<VStack spacing={4} py={8} align='stretch'>
 					<InputGroup >
 						<Input type="email" placeholder="Email" />
-						<InputRightElement width="4.5rem" children={<HiOutlineUser />} color="gray.600">
-						</InputRightElement>
+						<InputRightElement width="4.5rem" color="gray.600"><HiOutlineUser /></InputRightElement>						
 					</InputGroup>
 					<InputGroup size='md'>
 						<Input
@@ -74,4 +73,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;
