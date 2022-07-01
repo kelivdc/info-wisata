@@ -9,6 +9,8 @@ import {
   Button,
   VStack,
   Checkbox,
+  useColorModeValue,
+  Link,
 } from "@chakra-ui/react";
 
 import { HiEye, HiEyeOff, HiOutlineUser } from "react-icons/hi";
@@ -22,6 +24,9 @@ function Login() {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const router = useRouter();
+  const bgLogin = useColorModeValue('white','gray.700')
+  const bgBack = useColorModeValue("0.5", "0.9")
+  const textColor = useColorModeValue("gray.500", "white")
   return (
     <>
       <Head>
@@ -35,7 +40,7 @@ function Login() {
           position={"absolute"}
           overflow="hidden"
           width="full"
-          opacity={"0.5"}
+          opacity={bgBack}
           top={"0"}
           left={"0"}
         ></Box>
@@ -56,14 +61,14 @@ function Login() {
             position={"relative"}
             height="100vh"
           >
-            <Box bg="white" p={8} rounded={4} shadow="md" w="380px" mb={20}>
-              <Heading fontSize={"xl"} color="gray.700" textAlign="center">
+            <Box bg={bgLogin} p={8} rounded={4} shadow="md" w="380px" mb={20}>
+              <Heading fontSize={"xl"} textAlign="center">
                 Login
               </Heading>
               <VStack spacing={4} py={8} align="stretch">
                 <InputGroup>
-                  <Input type="email" placeholder="Email" variant="outline" />
-                  <InputRightElement width="4.5rem" color="gray.600">
+                  <Input type="email" placeholder="Email" variant="outline" color="gray.500" />
+                  <InputRightElement width="4.5rem">
                     <HiOutlineUser />
                   </InputRightElement>
                 </InputGroup>
@@ -73,22 +78,22 @@ function Login() {
                     type={show ? "text" : "password"}
                     placeholder="Enter password"
                     variant="outline"
+					color="gray.500"
                   />
                   <InputRightElement width="4.5rem">
                     <Button
                       h="1.75rem"
                       size="sm"
                       onClick={handleClick}
-                      color="gray.600"
                     >
                       {show ? <HiEye /> : <HiEyeOff />}
                     </Button>
                   </InputRightElement>
                 </InputGroup>
-                <Checkbox color="gray.600">Remember password</Checkbox>
+                <Checkbox color={textColor}>Remember password</Checkbox>
               </VStack>
-              <Flex justifyContent={"space-between"} color="gray.600">
-                <Goto url="/forgot" anchor="Forgot password ?" />
+              <Flex justifyContent={"space-between"}>
+                <Goto url="/forgot"><Link color={textColor}>Forgot password ?</Link></Goto>
                 <Button
                   colorScheme="linkedin"
                   size="md"

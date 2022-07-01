@@ -1,11 +1,11 @@
-import { Link, useColorMode, useColorModeValue } from '@chakra-ui/react'
+import { Link, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 import NextLink from "next/link"
 
-function Goto({url, anchor}) {    
+function Goto({url, children}) {    
   return (            
         <NextLink href={url} passHref>
-            <Link p={2}>{anchor}</Link>
+            {children}
         </NextLink>  
   )
 }
