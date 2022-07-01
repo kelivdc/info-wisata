@@ -27,7 +27,7 @@ function Slug() {
                 {[...Array(4)].map((x, i) =>
                 <Stack direction={["column", "row"]} w="100%" gap={[0, 4]} key={i}>
                     <Box w={["100%", "35%"]} position="relative">
-                    <Image src={gajahPic} layout="responsive" priority />
+                    <Image src={gajahPic} layout="responsive" priority alt="" />
                     <Box bg="red.600" color="white" fontSize="12px" as="text" rounded={4} p={1} position="absolute" bottom="0" m={2}>Wisata</Box>
                     </Box>
                     <Box w={["100%", "65%"]} color={textColor}>
