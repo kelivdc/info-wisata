@@ -17,37 +17,19 @@ import {
     InputGroup,
     InputRightElement
  } from '@chakra-ui/react'
-import NextLink from 'next/link'
 import { SearchIcon } from '@chakra-ui/icons'
-
-const Goto = ({url, label}) => {
-    const bgBox = useColorModeValue('blue.400','gray.600')
-    return (
-        <NextLink href={url} passHref>
-            <Link p={2} _hover={{bg: bgBox}}>{label}</Link>
-        </NextLink>  
-    )
-}
+import {Nav} from "./Goto"
 
 function Navbar() {
-  const bgBox = useColorModeValue('blue.600','blue.700');     
-  const [categories, setCategories] = useState(null);  
-    useEffect(() => {
-        async function getCategories() {        
-            const resp = await fetch(`${process.env.server_api}/api/v1/categories`);
-            setCategories(await resp.json());        
-        }
-        getCategories();
-    },[])
+  const bgBox = useColorModeValue('blue.600','blue.700');      
   return (
     <>
     <Box bg={bgBox} color='white' px={['5px ', '15px']}>        
         <Flex>            
             <Box>         
                 <HStack spacing="5px" overflowX="auto" scrollBehavior="none">
-                    {categories?.map((category, i) => 
-                        <Goto url={`/category/${category.slug}`} label={category.name} key={i} />
-                    )}
+                    <Nav url='/category/wisata' anchor="Wisata" _hover={{bg: bgBox}}/>
+                    <Nav url='/category/cafe' anchor="Cafe" _hover={{bg: bgBox}} />
                 </HStack>
             </Box>
             <Spacer />            
