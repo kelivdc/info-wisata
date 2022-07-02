@@ -5,12 +5,10 @@ import Topbar from './Topbar'
 function Content({children}) {
   return (
     <>
-        <Flex direction={"column"} w="full">
-            <Topbar />
-            <Box>
-                {children}
-            </Box>
-        </Flex>
+      <Flex direction={"column"} w="full">
+          <Topbar />
+          <Box p={8}>{children}</Box>
+      </Flex>
     </>
   )
 }

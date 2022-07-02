@@ -5,13 +5,13 @@ import Sidebar from './Sidebar'
 import Content from './Content'
 
 function Template({children, title}) {
-    const bgColor = useColorModeValue("gray.100", "gray.600")
+    const bgColor = useColorModeValue("#f8f9fc", "gray.700")
     return (
         <>
             <Head>
                 <title>{title || 'Kosong'}</title>
             </Head>
-            <Flex direction={"row"} bg={bgColor} fontSize="sm">
+            <Flex direction={"row"} bg={bgColor}>
                 <Sidebar />
                 <Content>{children}</Content>
             </Flex>
