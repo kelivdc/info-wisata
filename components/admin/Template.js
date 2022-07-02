@@ -1,16 +1,19 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 import Head from "next/head"
+import Sidebar from './Sidebar'
+import Content from './Content'
 
 function Template({children, title}) {
+    const bgColor = useColorModeValue("gray.100", "gray.600")
     return (
         <>
             <Head>
                 <title>{title || 'Kosong'}</title>
             </Head>
-            <Flex direction={"row"}>
-                <Box w="18%" bg="blue.600" h={"100vh"}>A</Box>
-                <Box w="82%">B</Box>
+            <Flex direction={"row"} bg={bgColor} fontSize="sm">
+                <Sidebar />
+                <Content>{children}</Content>
             </Flex>
         </>
     )

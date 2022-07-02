@@ -22,7 +22,7 @@ import {
     InputRightElement
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import { SunIcon, HamburgerIcon, SearchIcon } from '@chakra-ui/icons'
+import { SunIcon, HamburgerIcon, SearchIcon, MoonIcon } from '@chakra-ui/icons'
 
 function Topbar() {
     const { colorMode, toggleColorMode } = useColorMode()
@@ -49,7 +49,7 @@ function Topbar() {
           <Spacer />
           <HStack spasing="5px">
             <Center px={2} fontSize="sm">{tanggal}</Center>
-            <IconButton icon={<SunIcon />} onClick={toggleColorMode}/>
+            <IconButton size="sm" icon={colorMode == 'light' ? <MoonIcon /> : <SunIcon />} onClick={toggleColorMode}/>
             <IconButton display={{base: "block", md: "none"}} icon={<HamburgerIcon />} onClick={onOpen} />
             <Drawer
                 isOpen={isOpen}

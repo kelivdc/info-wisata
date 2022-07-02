@@ -1,12 +1,12 @@
 import React from 'react'
 import Template from '../../components/admin/Template'
 
-function dashboard() {
+function Post() {
   return (
-    <Template title="Dashboard">
-      Dashboard
+    <Template title="Post">
+      Post
     </Template>
   )
 }
 
-export default dashboard
+export default Post
