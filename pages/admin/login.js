@@ -12,6 +12,8 @@ import {
   useColorModeValue,
   Link,
   IconButton,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 
 import { HiEye, HiEyeOff, HiOutlineUser } from "react-icons/hi";
@@ -25,12 +27,45 @@ import { SunIcon, HamburgerIcon, SearchIcon, MoonIcon } from "@chakra-ui/icons";
 
 function Login() {
   const [show, setShow] = useState(false);
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [errorMsg, setErrorMsg] = useState('')
   const handleClick = () => setShow(!show);
   const router = useRouter();
   const bgLogin = useColorModeValue("white", "gray.700");
   const bgBack = useColorModeValue("0.5", "0.9");
   const textColor = useColorModeValue("#718096", "white");
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const btnLogin = async () => {
+    setErrorMsg('')
+    const datanya = {
+      username: username,
+      password: password
+    };
+    try {
+      const res = await fetch ('http://localhost:3000/api/v1/admin/login', {
+        method: "POST",
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datanya)
+      })      
+      const data = await res.json()
+      if (!data) {
+        setErrorMsg('Cannot connect to server')
+      } else {
+       if (res.status != 200) {
+        setErrorMsg(data.message)
+       } else {     
+        console.log(data.token)   
+       }
+      }
+    } catch (error) {
+      setErrorMsg('Cannot connect to server')
+    }          
+  }
 
   return (
     <>
@@ -85,9 +120,15 @@ function Login() {
                 p={2}
 				        size="sm"
               />
-              <Heading fontSize={"xl"} textAlign="center" color={textColor}>
+              <Heading fontSize={"xl"} textAlign="center" color={textColor} mb={4}>
                 Login
               </Heading>
+              {errorMsg != '' ? (
+                <Alert status='error' color={textColor}>
+                  <AlertIcon />
+                  {errorMsg}
+                </Alert>
+              ) : ''}
               <VStack spacing={4} py={8} align="stretch">
                 <InputGroup>
                   <Input
@@ -95,8 +136,11 @@ function Login() {
                     placeholder="Email/Username"
                     variant="outline"
                     color="gray.500"
+                    name="username"
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}                    
                   />
-                  <InputRightElement width="4.5rem">
+                  <InputRightElement width="3rem">
                     <HiOutlineUser color={textColor} />
                   </InputRightElement>
                 </InputGroup>
@@ -104,14 +148,17 @@ function Login() {
                   <Input
                     pr="4.5rem"
                     type={show ? "text" : "password"}
+                    name="password"
                     placeholder="Enter password"
                     variant="outline"
                     color={textColor}
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
                   />
-                  <InputRightElement width="4.5rem">
-                    <Button h="1.75rem" size="sm" onClick={handleClick}>
+                  <InputRightElement width="3rem">
+                    <Button h="1.75rem" size="sm" onClick={handleClick} bg={"inherit"} p={0}>
                       {show ? (
-                        <HiEye color={textColor} />
+                        <HiEye color={textColor}  />
                       ) : (
                         <HiEyeOff color={textColor} />
                       )}
@@ -128,7 +175,7 @@ function Login() {
                   colorScheme="blue"
                   size="md"
                   float={"right"}
-                  onClick={() => router.push(`${process.env.admin}/dashboard`)}
+                  onClick={btnLogin}
                 >
                   Login
                 </Button>

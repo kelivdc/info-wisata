@@ -26,86 +26,53 @@ import {
   Wrap,
   WrapItem,
   Checkbox,
+  Alert,
+  AlertIcon,
+  AlertDescription,
+  HStack,
 } from "@chakra-ui/react";
-import { Form, Formik, Field, useFormik, yupToFormErrors } from "formik";
-import { m } from "framer-motion";
 import React, { useState } from "react";
-import * as Yup from 'yup';
+import { slugify } from "/lib/Global";
 
 const Create = ({ modal_name }) => {  
-  const formik = useFormik({
-   
-  });
-  function validateName(value) {
-    let error
-    if (!value) {
-      error = 'Name is required'
-    } else if (value.toLowerCase() !== 'naruto') {
-      error = "Jeez! You're not a fan 😱"
-    }
-    return error
+  const [slug, setSlug] = useState('')
+  const handleName = (value) => {
+    setSlug(slugify(value))
   }
+
   return (
     <Modal isOpen={modal_name.isOpen} onClose={modal_name.onClose} size="lg">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Create Category</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>      
-          <Formik
-              initialValues={{
-                name: '',
-                publish: true,
-                sort: 10
-              }}
-              validationSchema={Yup.object({
-                name: Yup.string()
-                  .required('Name required')
-                  .min(5, "Minimum 5 characters"),
-                sort: Yup.number('Number only'),
-              })}
-              onSubmit={(values, actions) => {
-                alert(JSON.stringify(values, null, 2));
-                actions.resetForm();
-              }}          
-            >
-              {formik => (
-                <SimpleGrid
-                  as="form"
-                  justifyItems={"stretch"}
-                  onSubmit={formik.handleSubmit}
-                  spacing={2}
-                >
-                  <FormControl isInvalid={formik.errors.name && formik.touched.name} isRequired>
-                    <Flex justifyContent={"space-between"}>
-                      <FormLabel>Name</FormLabel>
-                      <Box w="70%">
-                        <Field as={Input} name="name"/>                    
-                        <FormErrorMessage>{formik.errors.name}</FormErrorMessage>
-                      </Box>
-                    </Flex>      
-                  </FormControl>                  
-                  <FormControl isInvalid={formik.errors.sort && formik.touched.sort} isRequired>
-                    <Flex justifyContent={"space-between"}>
-                      <FormLabel>Sort</FormLabel>
-                      <Box w="70%">
-                        <Field as={Input} name="sort"/>    
-                        <FormErrorMessage>{formik.errors.sort}</FormErrorMessage>
-                      </Box>
-                    </Flex>      
-                  </FormControl>    
-                    <Flex>
-                      <FormLabel w="30%">Publish</FormLabel>
-                      <Field name="publish" as={Checkbox} />
-                  </Flex>
-                  <Flex justifyContent={"flex-end"} mt={8} gap={2}>
-                    <Button colorScheme={"gray"} onClick={modal_name.onClose}>Cancel</Button>
-                    <Button colorScheme={"green"} type="submit">Save</Button>
-                  </Flex>             
-                </SimpleGrid>
-              )}
-          </Formik>
+        <ModalBody>
+          <Alert status="error" mb={2} is>
+            <AlertIcon />
+            <AlertDescription>Name is required<br />Hwqudhquwhdquwdh</AlertDescription>
+          </Alert>
+          <VStack gap={2}>
+            <FormControl isRequired as="fieldset">
+                <FormLabel>Name</FormLabel>
+                <Input id="name" name="name" type="text" onKeyUp={(e) => handleName(e.target.value)}/>
+            </FormControl>
+            <FormControl isRequired>
+                <FormLabel>Slug</FormLabel>
+                <Input id="name" name="slug" type="text" defaultValue={slug} />
+            </FormControl>
+            <FormControl isRequired>
+                <FormLabel>Sort</FormLabel>                
+                <Input id="sort" name="sort" type="number" />
+            </FormControl>
+            <FormControl>
+                <Checkbox name="publish">Publish</Checkbox>
+            </FormControl>
+          </VStack>
         </ModalBody>
+        <ModalFooter>
+          <Button mr={2} size="sm" colorScheme="gray" onClick={modal_name.onClose}>Cancel</Button>
+          <Button size="sm" colorScheme="green">Save</Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );

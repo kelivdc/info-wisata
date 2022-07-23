@@ -11,7 +11,7 @@ function Panel({children, title, top_button}) {
     const textHeader = useColorModeValue('#4e73df','gray.200')
   return (
     <Box bg={bgBox} border={"1px"} borderColor="gray.200" shadow="xl" rounded="md" >
-        <Box p={4} bg={bgHeader} roundedTop={"md"} color={textColor} borderBottom={"1px"} borderColor="gray.200">
+        <Box px={4} py={2} bg={bgHeader} roundedTop={"md"} color={textColor} borderBottom={"1px"} borderColor="gray.200">
           <Flex justifyContent={"space-between"} alignItems="center">
             <Heading fontSize="16px" fontWeight={"bold"} color={textHeader}>{title || ''}</Heading>
             {top_button}
